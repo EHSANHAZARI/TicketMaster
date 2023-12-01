@@ -12,7 +12,7 @@
       </div>
     </nav>
 
-    <!-- Your website content goes here -->
+    <!-- Display the content based on the current route -->
     <router-view></router-view>
   </div>
 </template>
