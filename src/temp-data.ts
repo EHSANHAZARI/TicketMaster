@@ -7,7 +7,7 @@ const tickets: Ticket[] = [
     ticketName: "General Admission",
     description: "Access to the main event area",
     isVip: false,
-    count: 1,
+    count: 100,
     price: 20.0,
   },
   {
