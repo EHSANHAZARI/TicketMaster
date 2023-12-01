@@ -9,6 +9,7 @@
  * @property {number} price - The price of each ticket.
  */
 export interface Ticket {
+  ticketId: number;
   ticketName: string;
   description: string;
   isVip: boolean;

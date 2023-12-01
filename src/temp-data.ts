@@ -4,6 +4,7 @@ import { Ticket } from "../src/types/Ticket";
 // Define an array of tickets with detailed information
 const tickets: Ticket[] = [
   {
+    ticketId: 111,
     ticketName: "General Admission",
     description: "Access to the main event area",
     isVip: false,
@@ -11,6 +12,7 @@ const tickets: Ticket[] = [
     price: 20.0,
   },
   {
+    ticketId: 222,
     ticketName: "VIP Pass",
     description: "Exclusive VIP access with perks",
     isVip: true,
@@ -19,5 +21,12 @@ const tickets: Ticket[] = [
   },
 ];
 
+const cartItems = [
+  {
+    userId: 1234,
+    tickets: [111, 222],
+  },
+];
+
 // Export the array of tickets for use in other parts of the application
-export default tickets;
+export default { tickets, cartItems };
