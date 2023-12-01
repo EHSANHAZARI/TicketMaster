@@ -1,6 +1,7 @@
-// SomeOtherFile.ts
+// Import the Ticket interface to define the structure of ticket objects
 import { Ticket } from "../src/types/Ticket";
 
+// Define an array of tickets with detailed information
 const tickets: Ticket[] = [
   {
     ticketName: "General Admission",
@@ -18,4 +19,5 @@ const tickets: Ticket[] = [
   },
 ];
 
+// Export the array of tickets for use in other parts of the application
 export default tickets;
