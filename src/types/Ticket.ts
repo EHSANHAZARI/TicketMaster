@@ -15,3 +15,5 @@ export interface Ticket {
   count: number;
   price: number;
 }
+
+export default Ticket;
