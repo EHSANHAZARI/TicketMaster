@@ -12,7 +12,19 @@
       </div>
     </nav>
 
-    <!-- Display the content based on the current route -->
+    <div class="ticket">
+      <h2 class="ticketDesc">All Tickets :</h2>
+      <Ticket
+        v-for="ticket in localTickets"
+        :key="ticket.ticketId"
+        :ticketName="ticket.ticketName"
+        :description="ticket.description"
+        :count="ticket.count"
+        :price="ticket.price"
+        :isVip="ticket.isVip"
+      />
+    </div>
+
     <router-view></router-view>
   </div>
 </template>
@@ -20,11 +32,25 @@
 <script>
 import "../style.css";
 import useTicketStore from "../store/ticketStore.ts";
+import Ticket from "./Ticket.vue";
 
 export default {
+  data() {
+    return {
+      localTickets: [], // Initialize localTickets as an empty array
+    };
+  },
   mounted() {
     const ticketStore = useTicketStore();
-    console.log("Contents of useTicketStore:", ticketStore.tickets);
+    // Assign the value of ticketStore.tickets to localTickets
+    this.localTickets = ticketStore.tickets;
+  },
+  components: {
+    Ticket,
   },
 };
 </script>
+
+<style>
+/* Add your styles here */
+</style>

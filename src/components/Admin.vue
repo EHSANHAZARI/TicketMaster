@@ -5,7 +5,7 @@
     </header>
 
     <nav>
-      <div>
+      <div class="nav">
         <router-link to="/">Home</router-link>
         <router-link to="/admin">Admin</router-link>
         <router-link to="/cart">Cart</router-link>

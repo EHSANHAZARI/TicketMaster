@@ -85,3 +85,45 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+/* Tickets css */
+/* Add your styles here */
+
+.ticketDesc {
+  color: black; /* Text color */
+  text-align: center; /* Center the text horizontally */
+  font-family: "Helvetica", sans-serif; /* Choose a suitable font */
+  text-transform: uppercase; /* Uppercase text */
+  letter-spacing: 2px; /* Add letter spacing */
+  background: linear-gradient(
+    to right,
+    #827111,
+    #ffcc00
+  ); /* Shining gold gradient background */
+  -webkit-background-clip: text; /* Clip the background to the text */
+  color: transparent; /* Make the text transparent to reveal the background */
+  padding: 2rem 0; /* Add padding to the top and bottom */
+  display: flex;
+  align-items: center; /* Center the text vertically */
+  justify-content: center; /* Center the text horizontally */
+}
+.ticket-card {
+  border: 2px solid black; /* Add a border to the ticket card */
+  padding: 10px; /* Add some padding for better spacing */
+  border-radius: 10px; /* Add rounded corners for a card-like appearance */
+}
+
+.vip-ticket {
+  background-color: red; /* Change the background color for VIP tickets */
+  color: white; /* Change text color for better visibility */
+}
+
+.normal-ticket {
+  background-color: blue; /* Change the background color for normal tickets */
+  color: white; /* Change text color for better visibility */
+}
+
+.vip-label {
+  font-weight: bold;
+  color: gold; /* Change the text color for VIP label */
+}

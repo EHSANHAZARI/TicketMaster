@@ -7,7 +7,18 @@ const useTicketStore = defineStore({
   state: () => {
     return {
       tickets: tempData.tickets,
+      cartItems: tempData.cartItems,
     };
+  },
+  actions: {
+    decrement(ticketId: number) {
+      const ticket = this.tickets.find((t) => t.ticketId === ticketId);
+      if (ticket) {
+        ticket.count--;
+      }
+    },
+
+    // You can add more actions related to cart management here
   },
 });
 
