@@ -11,16 +11,11 @@
         <router-link to="/cart">Cart</router-link>
       </div>
     </nav>
-
-    <form action="" class="ticket-form">
-      <div>
-        <label for="ticketId">Ticket ID:</label>
-        <input type="text" id="ticketId" v-model="ticketId" />
-      </div>
-
+    <!-- prevent is preventing the website from default behaviour which is to refreshing the page -->
+    <form @submit.prevent="addTicket" action="" class="ticket-form">
       <div>
         <label for="ticketName">Ticket Name:</label>
-        <input type="text" id="ticketName" v-model="ticketName" />
+        <input type="text" id="ticketName" v-model="ticketName" required />
       </div>
 
       <div>
@@ -35,13 +30,21 @@
 
       <div>
         <label for="count">Ticket Count:</label>
-        <input type="number" id="count" v-model="count" />
+        <input type="number" id="count" v-model="count" min="0" required />
       </div>
 
       <div>
         <label for="price">Ticket Price:</label>
-        <input type="number" step="0.01" id="price" v-model="price" />
+        <input
+          type="number"
+          step="0.01"
+          id="price"
+          v-model="price"
+          min="0"
+          required
+        />
       </div>
+
       <button>Adding Ticket</button>
     </form>
 
@@ -52,9 +55,52 @@
 
 <script>
 import tempData from "../temp-data";
+
 export default {
   data() {
-    return {};
+    return {
+      ticketName: "",
+      description: "",
+      isVip: false,
+      count: 0,
+      price: 0.0,
+    };
+  },
+  methods: {
+    addTicket() {
+      // Validate ticketName
+      if (!this.ticketName) {
+        alert("Please enter a Ticket Name.");
+        return;
+      }
+
+      // Validate count and price
+      if (this.count < 0 || this.price < 0) {
+        alert("Count and Price must not be negative.");
+        return;
+      }
+
+      // Create a new ticket object using the form data
+      const newTicket = {
+        ticketId: tempData.tickets.length + 1, // Generate ID based on the array length
+        ticketName: this.ticketName,
+        description: this.description,
+        isVip: this.isVip,
+        count: parseInt(this.count),
+        price: parseFloat(this.price),
+      };
+
+      // Add the new ticket to the tickets array in tempData
+      tempData.tickets.push(newTicket);
+      alert(this.ticketName + " is added");
+
+      // Reset the form fields
+      this.ticketName = "";
+      this.description = "";
+      this.isVip = false;
+      this.count = 0;
+      this.price = 0.0;
+    },
   },
 };
 </script>
