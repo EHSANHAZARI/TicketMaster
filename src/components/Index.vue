@@ -19,5 +19,12 @@
 
 <script>
 import "../style.css";
-export default {};
+import useTicketStore from "../store/ticketStore.ts";
+
+export default {
+  mounted() {
+    const ticketStore = useTicketStore();
+    console.log("Contents of useTicketStore:", ticketStore.tickets);
+  },
+};
 </script>

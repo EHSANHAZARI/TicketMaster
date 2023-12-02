@@ -7,8 +7,7 @@ import AdminPage from "./components/Admin.vue";
 import ShoppingCartPage from "./components/ShoppingCart.vue";
 import NotFoundPage from "./components/NotFoundPage.vue";
 import { createPinia } from "pinia";
-import { useMainStore } from "./stores/store"; // Import the Pinia store
-useMainStore;
+
 // Creating a Pinia instance
 const pinia = createPinia();
 
