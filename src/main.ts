@@ -6,7 +6,6 @@ import IndexPage from "./components/Index.vue";
 import AdminPage from "./components/Admin.vue";
 import ShoppingCartPage from "./components/ShoppingCart.vue";
 import NotFoundPage from "./components/NotFoundPage.vue";
-import { key, store } from "./stores/store";
 
 // Defining the routes for the application using Vue Router's RouteRecordRaw type
 const routes: RouteRecordRaw[] = [

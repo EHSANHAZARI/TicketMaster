@@ -42,6 +42,7 @@
         <label for="price">Ticket Price:</label>
         <input type="number" step="0.01" id="price" v-model="price" />
       </div>
+      <button>Adding Ticket</button>
     </form>
 
     <!-- Display the content based on the current route -->
