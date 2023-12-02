@@ -1,4 +1,4 @@
-// Importing necessary functions and components from Vue and Vue Router
+// main.ts
 import { createApp } from "vue";
 import App from "./App.vue";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
@@ -6,32 +6,36 @@ import IndexPage from "./components/Index.vue";
 import AdminPage from "./components/Admin.vue";
 import ShoppingCartPage from "./components/ShoppingCart.vue";
 import NotFoundPage from "./components/NotFoundPage.vue";
+import { createPinia } from "pinia";
+import { useMainStore } from "./stores/store"; // Import the Pinia store
+useMainStore;
+// Creating a Pinia instance
+const pinia = createPinia();
 
-// Defining the routes for the application using Vue Router's RouteRecordRaw type
+// Creating a router instance with the defined routes and web history
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    component: IndexPage, // Route for the Index page
+    component: IndexPage,
   },
   {
     path: "/admin",
-    component: AdminPage, // Route for the Admin page
+    component: AdminPage,
   },
   {
     path: "/cart",
-    component: ShoppingCartPage, // Route for the Shopping Cart page
+    component: ShoppingCartPage,
   },
   {
     path: "/:pathMatch(.*)*",
-    component: NotFoundPage, // Route for handling 404 Not Found errors
+    component: NotFoundPage,
   },
 ];
 
-// Creating a router instance with the defined routes and web history
 const router = createRouter({
-  history: createWebHistory(), // In Vite, the base URL is inferred automatically, and you don't need to use process.env.BASE_URL
+  history: createWebHistory(),
   routes,
 });
 
 // Creating the main Vue application instance, attaching the router, and mounting the app to the '#app' element in the HTML
-createApp(App).use(router).mount("#app");
+createApp(App).use(pinia).use(router).mount("#app");
