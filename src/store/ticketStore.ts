@@ -16,6 +16,12 @@ const useTicketStore = defineStore({
         ticket.count--;
       }
     },
+    increment(ticketId: number) {
+      const ticket = this.tickets.find((t) => t.ticketId === ticketId);
+      if (ticket) {
+        ticket.count++;
+      }
+    },
   },
 });
 
