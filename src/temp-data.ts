@@ -24,7 +24,7 @@ const tickets: Ticket[] = [
 const cartItems: CartItem[] = [
   {
     userId: 1234,
-    tickets: [111],
+    tickets: [],
   },
 ];
 

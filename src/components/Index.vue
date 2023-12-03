@@ -14,16 +14,7 @@
 
     <div class="ticket">
       <h2 class="ticketDesc">All Tickets :</h2>
-      <Ticket
-        v-for="ticket in localTickets"
-        :key="ticket.ticketId"
-        :ticketName="ticket.ticketName"
-        :description="ticket.description"
-        :count="ticket.count"
-        :price="ticket.price"
-        :isVip="ticket.isVip"
-        :ticketId="ticket.ticketId"
-      />
+      <Ticket :tickets="localTickets" />
     </div>
 
     <router-view></router-view>
@@ -51,7 +42,3 @@ export default {
   },
 };
 </script>
-
-<style>
-/* Add your styles here */
-</style>
