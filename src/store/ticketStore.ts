@@ -7,7 +7,6 @@ const useTicketStore = defineStore({
   state: () => {
     return {
       tickets: tempData.tickets,
-      cartItems: tempData.cartItems,
     };
   },
   actions: {
@@ -17,8 +16,6 @@ const useTicketStore = defineStore({
         ticket.count--;
       }
     },
-
-    // You can add more actions related to cart management here
   },
 });
 

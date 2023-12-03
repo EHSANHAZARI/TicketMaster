@@ -114,7 +114,7 @@ button:hover {
 }
 
 .vip-ticket {
-  background-color: red; /* Change the background color for VIP tickets */
+  background-color: orange; /* Change the background color for VIP tickets */
   color: white; /* Change text color for better visibility */
 }
 
@@ -126,4 +126,10 @@ button:hover {
 .vip-label {
   font-weight: bold;
   color: gold; /* Change the text color for VIP label */
+}
+
+/* Cart */
+.in-cart {
+  background-color: gray;
+  cursor: not-allowed;
 }

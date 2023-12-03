@@ -21,10 +21,10 @@ const tickets: Ticket[] = [
   },
 ];
 
-const cartItems = [
+const cartItems: CartItem[] = [
   {
     userId: 1234,
-    tickets: [111, 222],
+    tickets: [111],
   },
 ];
 

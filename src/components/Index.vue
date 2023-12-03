@@ -22,6 +22,7 @@
         :count="ticket.count"
         :price="ticket.price"
         :isVip="ticket.isVip"
+        :ticketId="ticket.ticketId"
       />
     </div>
 

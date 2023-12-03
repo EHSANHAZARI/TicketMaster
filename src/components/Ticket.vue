@@ -7,25 +7,29 @@
         <p>Count: {{ count }}</p>
         <p>Price: ${{ price.toFixed(2) }}</p>
         <p v-if="isVip" class="vip-label">VIP Pass</p>
-        <button>Add To Cart</button>
+        <button @click.prevent="addToCart">Add To Cart</button>
       </div>
     </li>
   </ul>
 </template>
 
 <script>
-import "../style.css";
+import { useCartStore } from "../store/cartItemsStore.ts";
+
 export default {
   props: {
+    ticketId: Number,
     ticketName: String,
     description: String,
     count: Number,
     price: Number,
     isVip: Boolean,
   },
+  methods: {
+    addToCart() {
+      // Access the cart store and call the addToCart action
+      useCartStore().addToCart(this.ticketId);
+    },
+  },
 };
 </script>
-
-<style>
-/* Add your styles here */
-</style>
