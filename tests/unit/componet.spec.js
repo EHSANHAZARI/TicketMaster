@@ -1,20 +1,22 @@
-// tests/unit/example.spec.js
+// Import necessary dependencies and modules for testing
 import { mount } from "@vue/test-utils";
 import { createApp } from "vue";
-import { pinia } from "./setupTests"; // Import the Pinia instance for mocking initialization
+import { pinia } from "./setupTests";
 import Index from "../../src/components/Index.vue";
 import Ticket from "../../src/components/Ticket.vue";
 import Admin from "../../src/components/Admin.vue";
 import CartItem from "../../src/components/CartItem.vue";
+import ShoppingCart from "../../src/components/ShoppingCart.vue";
 import useTicketStore from "../../src/store/ticketStore";
-import tempData from "../../src/temp-data";
+import useCartStore from "../../src/store/cartItemsStore";
 
-// Create a local Vue instance for mocking
+// Create a local Vue instance and set up Pinia for mocking
 const localVue = createApp();
 localVue.use(pinia);
 
 // Test suite for rendering components
 describe("Rendering Components", () => {
+  // Test case: renders Admin page when passed as a prop
   it("renders Admin page when passed as a prop", () => {
     const wrapper = mount(Admin, {
       global: {
@@ -27,6 +29,7 @@ describe("Rendering Components", () => {
     });
   });
 
+  // Test case: renders home page when passed as a prop
   it("renders home page when passed as a prop", () => {
     const wrapper = mount(Index, {
       global: {
@@ -39,6 +42,7 @@ describe("Rendering Components", () => {
     });
   });
 
+  // Test case: renders Admin page when passed as a prop
   it("renders Admin page when passed as a prop", () => {
     const wrapper = mount(Admin, {
       global: {
@@ -48,6 +52,7 @@ describe("Rendering Components", () => {
     });
   });
 
+  // Test case: renders cart page when passed as a prop
   it("renders cart page when passed as a prop", () => {
     const wrapper = mount(Index, {
       global: {
@@ -63,6 +68,7 @@ describe("Rendering Components", () => {
 
 // Test suite for Ticket component
 describe("Ticket.vue", () => {
+  // Test case: renders non-VIP ticket details correctly
   it("renders non-VIP ticket details correctly", () => {
     // Sample ticket data for testing
     const mockTicket = {
@@ -91,6 +97,7 @@ describe("Ticket.vue", () => {
     expect(wrapper.html()).not.toContain("VIP Pass");
   });
 
+  // Test case: renders VIP ticket details correctly
   it("renders VIP ticket details correctly", () => {
     // Sample ticket data for testing
     const mockTicket = {
@@ -120,68 +127,72 @@ describe("Ticket.vue", () => {
   });
 });
 
-describe("Admin.vue", () => {
-  it("renders a new ticket in Ticket.vue when 'Add Ticket' button is clicked", async () => {
-    // Mount the Admin component
-    const wrapper = mount(Admin, {
-      global: {
-        plugins: [pinia.plugin],
-        components: { Ticket },
-      },
-    });
+// Test suite for useTicketStore
+describe("useTicketStore", () => {
+  // Test case: adds a new ticket to the store when addToTicket is called
+  it("adds a new ticket to the store when addToTicket is called", () => {
+    // Create a local instance of the store
+    const ticketStore = useTicketStore();
 
-    // Set values for the new ticket
-    await wrapper.setData({
+    // Initial tickets count, helps us control changes made by clicking the button
+    const initialTicketsCount = ticketStore.tickets.length;
+
+    // Sample ticket data for testing
+    const newTicket = {
       ticketName: "New Concert Ticket",
-      description: "Exciting new concert",
+      description: "A new fantastic concert experience",
       isVip: false,
       count: 10,
       price: 29.99,
-    });
+    };
 
-    // Find the 'Add Ticket' button and trigger a click event
-    await wrapper.find("button").trigger("click");
+    // Call the addToTicket method
+    ticketStore.addToTicket(newTicket);
 
-    // Use asynchronous waiting
-    await wrapper.vm.$nextTick();
+    // Assert that the ticket was added to the store
+    expect(ticketStore.tickets.length).toBe(initialTicketsCount + 1);
 
-    // Find the Ticket component within the Admin component
-    const ticketWrapper = mount(Ticket, {
-      props: {
-        tickets: tempData.tickets, // Pass the updated tickets array
+    // Assert that the added ticket has the correct properties
+    const addedTicket = ticketStore.tickets[initialTicketsCount];
+    expect(addedTicket.ticketName).toBe(newTicket.ticketName);
+    expect(addedTicket.description).toBe(newTicket.description);
+    expect(addedTicket.isVip).toBe(newTicket.isVip);
+    expect(addedTicket.count).toBe(newTicket.count);
+    expect(addedTicket.price).toBe(newTicket.price);
+  });
+});
+
+// Test suite for ShoppingCart.vue
+describe("ShoppingCart.vue", () => {
+  // Test case: calls populateCartItems when addToCart is called
+  it("calls populateCartItems when addToCart is called", async () => {
+    // Create a local instance of the cart store
+    const cartStore = useCartStore();
+
+    // Mock the populateCartItems method
+    jest.spyOn(cartStore, "populateCartItems");
+
+    // Sample ticket data for testing
+    const mockTicket = {
+      ticketId: 1,
+      ticketName: "Concert Ticket",
+      description: "A fantastic concert experience",
+      count: 5,
+      price: 25.99,
+      isVip: false,
+    };
+
+    // Mount the ShoppingCart component
+    const wrapper = mount(ShoppingCart, {
+      global: {
+        plugins: [pinia.plugin],
       },
     });
-    const ticketComponent = ticketWrapper.findComponent(Ticket);
 
-    // Check if the rendered HTML contains the information of the new ticket
-    expect(ticketComponent.text()).toContain("New Concert Ticket");
-    expect(ticketComponent.text()).toContain(
-      "Description: Exciting new concert"
-    );
-    expect(ticketComponent.text()).toContain("Count: 10");
-    expect(ticketComponent.text()).toContain("Price: $29.99");
+    // Add a ticket to the cart
+    await cartStore.addToCart(mockTicket.ticketId);
 
-    // Ensure VIP label is not displayed for non-VIP tickets
-    expect(ticketComponent.html()).not.toContain("VIP Pass");
-
-    // Check if the new ticket is added to the tempData.tickets array
-    expect(tempData.tickets).toHaveLength(1);
-    const addedTicket = tempData.tickets[0];
-    expect(addedTicket.ticketName).toBe("New Concert Ticket");
-    expect(addedTicket.description).toBe("Exciting new concert");
-    expect(addedTicket.isVip).toBe(false);
-    expect(addedTicket.count).toBe(10);
-    expect(addedTicket.price).toBe(29.99);
-
-    // Check if the new ticket is added to the ticketStore
-    const ticketStore = useTicketStore();
-    const storedTickets = ticketStore.getTickets();
-    expect(storedTickets).toHaveLength(1);
-    const storedTicket = storedTickets[0];
-    expect(storedTicket.ticketName).toBe("New Concert Ticket");
-    expect(storedTicket.description).toBe("Exciting new concert");
-    expect(storedTicket.isVip).toBe(false);
-    expect(storedTicket.count).toBe(10);
-    expect(storedTicket.price).toBe(29.99);
+    // Check if the populateCartItems method was called
+    expect(cartStore.populateCartItems).toHaveBeenCalled();
   });
 });
