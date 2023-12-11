@@ -10,10 +10,12 @@ This document encapsulates all my project-related notes, encompassing insights g
    - Clone the TicketMaster repository from the main branch.
 
 2. **Install Dependencies:**
-   - Run `npm install` to install project dependencies.
+   - Run `npm install --force` to install project dependencies.
+   - Run 'npm run dev" to run the project
+   - Run `npm run test:unit to run the unit testing"
 
-3. **Additional Setup:**
-   - Install additional dependencies:
+   **Additional Setup:**
+   - Install additional dependencies if needed:
      - `npm install pinia`
      - `npm install vue-router@4`
 4. **Main.ts Configuration:**
@@ -43,6 +45,17 @@ This document encapsulates all my project-related notes, encompassing insights g
 
 - Utilized Pinia for storing variables and accessing functionalities.
 - Breaked down components into smaller, modular ones for easier testing and debugging.
+
+## Unit Tests : 
+-Open tests/unit folder
+-Open componet.spec.js file to see the tests on the components mounting plus testing on the important functionalities.
+
+### Tested here
+- Tested the mounting of the component.
+- Checked if adding "isVip" results in the appearance of VIP-related information on the ticket.
+- Verified that calling the `addToTicket` function increases the length of the associated array.
+- Ensured that calling `addToCart` triggers the execution of the `populateCartItems` function, confirming proper functionality.
+
 
 ## Note
 
