@@ -47,8 +47,8 @@ This document encapsulates all my project-related notes, encompassing insights g
 - Breaked down components into smaller, modular ones for easier testing and debugging.
 
 ## Unit Tests : 
--Open tests/unit folder
--Open componet.spec.js file to see the tests on the components mounting plus testing on the important functionalities.
+- Open the `tests/unit` folder.
+- Navigate to the `component.spec.js` file to review tests related to the component's mounting and essential functionalities.
 
 ### Tested here
 - Tested the mounting of the component.
