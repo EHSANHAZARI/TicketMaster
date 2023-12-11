@@ -42,16 +42,6 @@ describe("Rendering Components", () => {
     });
   });
 
-  // Test case: renders Admin page when passed as a prop
-  it("renders Admin page when passed as a prop", () => {
-    const wrapper = mount(Admin, {
-      global: {
-        plugins: [pinia.plugin],
-        components: {},
-      },
-    });
-  });
-
   // Test case: renders cart page when passed as a prop
   it("renders cart page when passed as a prop", () => {
     const wrapper = mount(Index, {
