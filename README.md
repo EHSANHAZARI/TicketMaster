@@ -11,8 +11,8 @@ This document encapsulates all my project-related notes, encompassing insights g
 
 2. **Install Dependencies:**
    - Run `npm install --force` to install project dependencies.
-   - Run 'npm run dev" to run the project
-   - Run `npm run test:unit to run the unit testing"
+   - Run 'npm run dev` to run the project
+   - Run `npm run test:unit` to run the unit testing"
 
    **Additional Setup:**
    - Install additional dependencies if needed:
